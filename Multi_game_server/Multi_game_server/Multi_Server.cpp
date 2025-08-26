@@ -192,14 +192,14 @@ DWORD WINAPI Do_timer(LPVOID arg) {
 		if (ret == false) continue;
 		int _id = ev.obj_id;
 		if (ev.start_time <= chrono::system_clock::now()) {
-			if (ev.order == START_EXPL) //1. 폭발 시작
+			if (ev.order == START_EXPL) 
 			{
-
+				//1. 폭발 시작 - 맵 업데이트(폭발 범위 측정)
 				bombs.front().Explode(selectedMap, clients);
 				//2. 폭탄이 삭제되기 전 전역큐에 폭발범위에 해당하는 맵인덱스들을 넣는다.
 				explosionVecs.push_back(bombs.front().explosionMapIndexs);
 				
-				// 폭발 시작 시 정지해 있는 플레이어 체크
+				//3. 폭발 시작 시 정지해 있는 플레이어 체크(움직일때는 따로 충돌체크함)
 				for (auto& cl : clients) {
 					if (cl.in_use == false) continue;
 					if(cl._state != PLAY) continue;
@@ -209,7 +209,7 @@ DWORD WINAPI Do_timer(LPVOID arg) {
 				//확인용 출력
 				//PrintMap();
 
-				//폭탄 삭제전 플레이어 현재 폭탄 갯수 갱신
+				//4. 폭탄 삭제전 플레이어 현재 폭탄 갯수 갱신
 				int bt = clients[_id]._current_bomb_count;
 				if (bt > 0) { 
 					--clients[_id]._current_bomb_count;
@@ -217,16 +217,16 @@ DWORD WINAPI Do_timer(LPVOID arg) {
 				
 				bombs.pop_front();
 			}
-			else if (ev.order == END_EXPL) //4. 폭발 끝
+			else if (ev.order == END_EXPL) // 폭발 끝
 			{
 				// 전역큐의 첫번째 원소에는 폭발범위가 있고
 				for (auto& explosionMapIndex : explosionVecs.front()) {
 					auto [ix, iy] = explosionMapIndex;
-					//5. 폭발 중인 맵인덱스를 하나씩 클라로 보낸다. - 클라에서 폭발 끝냄
+					// 폭발을 끝내기 위해 맵 인덱스를 하나씩 클라로 보낸다. -> 클라에서 폭발 효과 끔
 					SendExplosionEnd(ix, iy);
 					selectedMap[iy][ix] = EMPTY;
 				}
-				//6. 폭발삭제
+				// 폭발삭제
 				explosionVecs.pop_front();
 
 				//확인용 출력
@@ -547,7 +547,7 @@ void Setting_Map()
 //===== 충돌체크 함수
 //충돌 발생시 1 리턴 / 충돌이 없으면 0 리턴
 
-//--- 폭발과 플레이어 간 충돌체크용 함수 (밑에 충돌체크 함수보다 부하 적음)
+//--- '폭발-정지한 플레이어' 간 충돌체크용 함수 (밑에 충돌체크 함수보다 부하 적음)
 int Check_Expl_Collision(int source_type, int source_index, vector<pair<int, int>>& expl)
 {
 	int s_x{ 0 }, s_y{ 0 };
@@ -594,7 +594,7 @@ int Check_Expl_Collision(int source_type, int source_index, vector<pair<int, int
 	return 0;	//충돌X
 }
 
-//--- 플레이어-객체 간 충돌체크용 함수
+//--- '움직이는 플레이어-객체' 간 충돌체크용 함수
 int Check_Collision(int source_type, int source_index)
 {
 	int s_x{ 0 }, s_y{ 0 };
@@ -911,8 +911,7 @@ void Process_packet(int client_index, char* p)
 		break;
 	}
 
-	case INIT_BOMB: {	// 1. 폭탄 받음
-		//////////////////////////////////////////////////////////
+	case INIT_BOMB: {	//1. 폭탄 받음
 
 		INIT_BOMB_packet* packet = reinterpret_cast<INIT_BOMB_packet*>(p);
 
@@ -935,20 +934,21 @@ void Process_packet(int client_index, char* p)
 
 		packet->indx = obj_id;
 
+		//3. 폭탄 생성 명령 모든 플레이어에게 보냄
 		for (auto& pl : clients) {
 			if (pl._state != PLAY) continue;
 			if (true == pl.in_use)
 			{
-				// 3. 폭탄생성명령 모든 플레이어에게 보냄
 				pl.Do_send(sizeof(INIT_BOMB_packet), packet);
 			}
 		};
 
 		//4. 타이머 큐에 3초짜리 타이머 넣음
 		Timer_Event(cl._index, START_EXPL, 3000ms);
+		//5. 3.5초 후에는 폭발 끝내는 타이머 넣음
 		Timer_Event(cl._index, END_EXPL, 3500ms);
 
-		//5. 폭탄 터뜨림
+		//6. 타이머 이벤트를 signaled 상태로 전환
 		SetEvent(htimerEvent);
 
 		break;
