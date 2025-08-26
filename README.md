@@ -31,7 +31,7 @@
   </details>
 
 - 서버는 각 연결된 클라마다 송수신 쓰레드를 따로 가지고, 클라는 하나의 송수신 스레드를 가지고 통신을 처리한다.
-* 코드 보기: [서버 패킷 처리 함수](https://github.com/SeungWon-git/Bomberman_project/blob/main/Multi_game_server/Multi_game_server/Multi_Server.cpp#L800), [클라 패킷 처리 함수](https://github.com/SeungWon-git/Bomberman_project/blob/main/Multi_game_client/Bomberman_project/Bomberman_project.cpp#L1140)
+* 코드 보기: [서버 패킷 처리 함수](https://github.com/SeungWon-git/Bomberman_project/blob/main/Multi_game_server/Multi_game_server/Multi_Server.cpp#L799), [클라 패킷 처리 함수](https://github.com/SeungWon-git/Bomberman_project/blob/main/Multi_game_client/Bomberman_project/Bomberman_project.cpp#L1140)
 
 ### 💥 2D 평면 상의 충돌 체크
 - 먼저, 충돌 체크는 정확한 동기화를 위해 서버에서 확인 → 클라로 결과 전송
@@ -49,3 +49,9 @@
 ### 🗺️ json을 이용한 맵 생성기
 - json을 이용하여 가독성, 맵 수정, 새로 생성에 용이
 * 코드 보기: [맵 로더 함수](https://github.com/SeungWon-git/Bomberman_project/blob/main/Multi_game_server/Multi_game_server/Multi_Server.cpp#L466), [맵1 저장 형태](https://github.com/SeungWon-git/Bomberman_project/blob/main/Multi_game_server/Multi_game_server/maps_json/map_1.json), [맵2 저장 형태](https://github.com/SeungWon-git/Bomberman_project/blob/main/Multi_game_server/Multi_game_server/maps_json/map_2.json)
+
+---
+
+## 📎 기타
+- 소스 코드: 👉 [서버 소스 코드](https://github.com/SeungWon-git/Bomberman_project/tree/main/Multi_game_client/Bomberman_project), [클라 소스 코드](https://github.com/SeungWon-git/Bomberman_project/tree/main/Multi_game_client/Bomberman_project)
+- 최종 보고서: 📃 [최종 보고서(word)](https://github.com/SeungWon-git/Bomberman_project/blob/main/10%EC%A1%B0%20-%20PROJECT%20PROGRESS%20REPORT.docx) 
