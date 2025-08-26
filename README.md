@@ -18,6 +18,28 @@
 
 ## 📝 구현 내용 상세 설명
 
-### 2D 평면 상의 충돌체크 (플레이어-벽돌, 플레이어-아이템, 플레이어-폭발)
-### Nagle 알고리즘 off → 패킷 전송 지연 최소화로 실시간 반응성 업
-### json을 이용한 맵 생성기 → 수정, 새로 생성에 용이
+### TCP 소켓 통신을 이용하여 멀티 환경 조성
+* 원할한 통신 방식을 설계하기 위해 자세한 Flow Chart를 작성
+<details>
+  <summary>서버 Flow Chart</summary>
+<img width="1324" height="1362" alt="image" src="https://github.com/user-attachments/assets/8f6272e8-be0a-4917-8c92-446746fde1ca" />
+</details>
+
+<details>
+  <summary>클라 Flow Chart</summary>
+<img width="1338" height="841" alt="image" src="https://github.com/user-attachments/assets/2470ee5c-46b5-4207-8dd4-08afa84fb8dd" />
+</details>
+
+* 코드 보기: 
+
+### 💥 2D 평면 상의 충돌체크 (플레이어-벽돌, 플레이어-아이템, 플레이어-폭발)
+- 
+* 코드 보기:
+  
+### ⚙️ Nagle 알고리즘 off → 패킷 전송 지연 최소화로 실시간 반응성 업
+- 
+* 코드 보기:
+  
+### 🗺️ json을 이용한 맵 생성기
+- json을 이용하여 맵 수정, 새로 생성이 용이
+* 코드 보기: 
