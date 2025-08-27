@@ -9,7 +9,7 @@
    > + **TCP 소켓 프로그래밍**을 활용한 멀티 플레이 구현
    > + 플레이어 이동 & 체력, 폭탄 생성, 폭발 효과, 블록 생성 & 파괴, 아이템 생성 & 획득와 같은 여러가지 게임 요소 동기화
  - 개발에 사용된 기술 스택:
-   + WinAPI
+   + WinAPI, C++
    + TCP 소켓 프로그래밍
  - 시연 영상: [▶️ 유투브 영상 보기](https://www.youtube.com/)
 <img width="750" height="414" alt="image" src="https://github.com/user-attachments/assets/0051c709-3dfc-48d6-b5c7-73f10142192a" />
