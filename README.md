@@ -19,7 +19,7 @@
 
 ## 📝 구현 내용 상세 설명
 
-### TCP 소켓 통신을 이용하여 멀티 환경 조성
+### 🖧 TCP 소켓 통신을 이용하여 멀티 환경 조성
 * 원할한 통신 방식을 설계하기 위해 자세한 **Flow Chart**를 작성
   <details>
     <summary>서버 Flow Chart</summary>
