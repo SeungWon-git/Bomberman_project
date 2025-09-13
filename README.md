@@ -12,7 +12,7 @@
  - 개발에 사용된 기술 스택:
    + WinAPI, C++
    + TCP 소켓 프로그래밍
- - 시연 영상: [▶️ 유투브 영상 보기](https://www.youtube.com/)
+ - 시연 영상: [▶️ 유투브 영상 보기](https://youtu.be/9z3ks66RKt8)
 <img width="750" height="414" alt="image" src="https://github.com/user-attachments/assets/0051c709-3dfc-48d6-b5c7-73f10142192a" />
 
 ---
